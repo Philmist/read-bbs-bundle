@@ -1,0 +1,226 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"description": "Normalized chat message payload shared across Twitch and BBS.JPNKN sources.",
+	"properties": {
+		"schema": {
+			"type": "string",
+			"enum": ["chat.bridge.message.v1"]
+		},
+		"id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"source": {
+			"type": "string",
+			"enum": ["twitch", "bbs_jpnkn"]
+		},
+		"receivedAt": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"channel": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"minLength": 1
+				},
+				"name": {
+					"type": "string",
+					"minLength": 1
+				}
+			},
+			"required": ["id", "name"],
+			"additionalProperties": false
+		},
+		"thread": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"minLength": 1
+				}
+			},
+			"required": ["id"],
+			"additionalProperties": false
+		},
+		"author": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": ["string", "null"]
+				},
+				"name": {
+					"type": "string",
+					"minLength": 1
+				},
+				"displayName": {
+					"type": "string",
+					"minLength": 1
+				}
+			},
+			"required": ["name", "displayName"],
+			"additionalProperties": false
+		},
+		"message": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"minLength": 1
+				},
+				"text": {
+					"type": "string"
+				},
+				"rawText": {
+					"type": "string"
+				},
+				"isReply": {
+					"type": "boolean"
+				}
+			},
+			"required": ["id", "text"],
+			"additionalProperties": false
+		},
+		"tags": {
+			"type": "object",
+			"additionalProperties": {
+				"type": "string"
+			}
+		},
+		"sourceData": {
+			"oneOf": [
+				{
+					"type": "object",
+					"properties": {
+						"kind": {
+							"type": "string",
+							"enum": ["bbs_jpnkn"]
+						},
+						"topic": {
+							"type": "string",
+							"minLength": 1
+						},
+						"no": {
+							"type": "integer",
+							"minimum": 1
+						},
+						"bbsid": {
+							"type": "string",
+							"minLength": 1
+						},
+						"threadkey": {
+							"type": "string",
+							"minLength": 1
+						},
+						"dat": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "string"
+								},
+								"mail": {
+									"type": "string"
+								},
+								"date": {
+									"type": "string"
+								},
+								"body": {
+									"type": "string"
+								},
+								"title": {
+									"type": "string"
+								}
+							},
+							"required": ["name", "mail", "date", "body", "title"],
+							"additionalProperties": false
+						}
+					},
+					"required": ["kind", "topic", "no", "bbsid", "threadkey", "dat"],
+					"additionalProperties": false
+				},
+				{
+					"type": "object",
+					"properties": {
+						"kind": {
+							"type": "string",
+							"enum": ["twitch"]
+						},
+						"channelId": {
+							"type": "string",
+							"minLength": 1
+						},
+						"channelLogin": {
+							"type": "string",
+							"minLength": 1
+						},
+						"messageId": {
+							"type": "string",
+							"minLength": 1
+						},
+						"userId": {
+							"type": "string",
+							"minLength": 1
+						},
+						"userLogin": {
+							"type": "string",
+							"minLength": 1
+						},
+						"userDisplayName": {
+							"type": "string",
+							"minLength": 1
+						},
+						"badges": {
+							"type": "object",
+							"additionalProperties": {
+								"type": "string"
+							}
+						},
+						"replyParentMessageId": {
+							"type": ["string", "null"]
+						},
+						"isAction": {
+							"type": "boolean"
+						},
+						"isFirst": {
+							"type": "boolean"
+						},
+						"isReturningChatter": {
+							"type": "boolean"
+						},
+						"bits": {
+							"type": "integer",
+							"minimum": 0
+						}
+					},
+					"required": [
+						"kind",
+						"channelId",
+						"channelLogin",
+						"messageId",
+						"userId",
+						"userLogin",
+						"userDisplayName"
+					],
+					"additionalProperties": false
+				}
+			]
+		},
+		"raw": {
+			"type": "object",
+			"properties": {
+				"topic": {
+					"type": "string"
+				},
+				"payload": {
+					"type": "string"
+				}
+			},
+			"required": ["payload"],
+			"additionalProperties": false
+		}
+	},
+	"required": ["schema", "id", "source", "receivedAt", "channel", "author", "message", "sourceData", "raw"],
+	"additionalProperties": false
+}

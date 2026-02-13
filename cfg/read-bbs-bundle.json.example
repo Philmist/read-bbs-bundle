@@ -1,0 +1,14 @@
+{
+	"bbsMqtt": {
+		"enabled": true,
+		"host": "bbs.jpnkn.com",
+		"port": 1883,
+		"protocol": "mqtt",
+		"username": "YOUR_MQTT_USERNAME",
+		"password": "YOUR_MQTT_PASSWORD",
+		"boardId": "philmist",
+		"reconnectPeriodMs": 3000,
+		"connectTimeoutMs": 30000,
+		"keepaliveSec": 60
+	}
+}

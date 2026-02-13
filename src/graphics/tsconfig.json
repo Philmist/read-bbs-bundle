@@ -1,0 +1,10 @@
+{
+	"extends": "../../tsconfig.build.json",
+	"compilerOptions": {
+		"module": "preserve",
+		"outDir": "../../graphics",
+		"rootDir": "./",
+		"lib": ["dom", "es2021"],
+	},
+	"include": ["**/*.ts", "../types/**/*.d.ts", "../../node_modules/@nodecg/types/types/augment-window.d.ts"]
+}

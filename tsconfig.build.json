@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"strict": true,
+		"skipLibCheck": false,
+		"sourceMap": true,
+		"inlineSourceMap": false
+	},
+	"include": ["src/**/*.*ts", "node_modules/@nodecg/types/types/augment-window.d.ts"]
+}

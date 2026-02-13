@@ -1,0 +1,9 @@
+{
+	"extends": "../../tsconfig.build.json",
+	"compilerOptions": {
+		"module": "nodenext",
+		"outDir": "../../extension",
+		"rootDir": "./"
+	},
+	"include": ["**/*.*ts", "../types/schemas/**/*.d.ts"]
+}

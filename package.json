@@ -1,0 +1,90 @@
+{
+  "name": "read-bbs-bundle",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "philmist"
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension",
+    "schemas"
+  ],
+  "keywords": [
+    "bbs",
+    "twitch",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^2.0.0",
+    "extension": "extension/index.js",
+    "dashboardPanels": [
+      {
+        "name": "read-bbs",
+        "title": "Read BBS",
+        "width": 2,
+        "file": "read-bbs.html",
+        "headerColor": "#525F78"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "index.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      }
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@types/createjs": "^0.0.32",
+    "mqtt": "^5.15.0",
+    "ts-node": "*"
+  },
+  "scripts": {
+    "build": "run-p build:*",
+    "build:assets": "node scripts/copy-assets.js",
+    "build:schemas": "npm run generate-schema-types",
+    "build:extension": "tsc -p src/extension/tsconfig.json",
+    "build:dashboard": "tsc -p src/dashboard/tsconfig.json",
+    "build:graphics": "tsc -p src/graphics/tsconfig.json",
+    "watch": "run-p watch:base nodemon:base",
+    "watch:base": "run-p -r watch:schemas watch:extension watch:browser",
+    "watch:extension": "tsc -p src/extension/tsconfig.json -w",
+    "watch:dashboard": "tsc -p src/dashboard/tsconfig.json -w",
+    "watch:graphics": "tsc -p src/graphics/tsconfig.json -w",
+    "watch:assets": "nodemon --watch src/dashboard --watch src/graphics --ext html,css,js,json,svg,png,jpg,jpeg,gif,webp,ico --exec \"npm run build:assets\"",
+    "watch:browser": "run-p -r watch:dashboard watch:graphics watch:assets",
+    "watch:schemas": "nodemon --watch schemas --ext json --exec \"npm run build:schemas\"",
+    "dev": "run-s build watch",
+    "nodemon:base": "nodemon",
+    "nodecg:base": "nodecg start",
+    "generate-schema-types": "node scripts/generate-schema-types.js"
+  },
+  "devDependencies": {
+    "@nodecg/types": "^2.0.0",
+    "@types/node": "^18",
+    "@types/ws": "^8.18.1",
+    "glob": "^10.2.7",
+    "nodecg": "^2.6.4",
+    "nodemon": "*",
+    "npm-run-all": "^4.1.5",
+    "trash-cli": "*",
+    "typescript": "^5.1.3"
+  },
+  "license": "MIT"
+}

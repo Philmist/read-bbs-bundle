@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Chat Bridge Monitor</title>
+		<style>
+			:root {
+				--bg: rgba(10, 14, 24, 0.74);
+				--panel: rgba(15, 21, 35, 0.88);
+				--line: rgba(255, 255, 255, 0.14);
+				--text-main: #ecf2ff;
+				--text-sub: #9eabc4;
+				--badge-bbs: #20bdb0;
+				--badge-twitch: #f0a500;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				font-family:
+					'Segoe UI',
+					'BIZ UDPGothic',
+					'Hiragino Kaku Gothic ProN',
+					Meiryo,
+					sans-serif;
+				color: var(--text-main);
+				background: transparent;
+				overflow: hidden;
+			}
+
+			.stage {
+				position: relative;
+				width: 1920px;
+				height: 1080px;
+			}
+
+			.chat-panel {
+				position: absolute;
+				left: 48px;
+				bottom: 48px;
+				width: 920px;
+				height: 760px;
+				padding: 18px 20px;
+				border: 1px solid var(--line);
+				border-radius: 14px;
+				background: linear-gradient(160deg, var(--bg), var(--panel));
+				backdrop-filter: blur(5px);
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+			}
+
+			.panel-header {
+				display: flex;
+				align-items: flex-end;
+				justify-content: space-between;
+				gap: 18px;
+				padding-bottom: 10px;
+				border-bottom: 1px solid var(--line);
+			}
+
+			.panel-title {
+				font-size: 38px;
+				font-weight: 700;
+				letter-spacing: 0.03em;
+			}
+
+			.panel-meta {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+				gap: 4px;
+				font-size: 21px;
+				color: var(--text-sub);
+			}
+
+			.message-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+				overflow: hidden;
+			}
+
+			.message-item {
+				display: grid;
+				grid-template-columns: auto 1fr;
+				column-gap: 12px;
+				align-items: baseline;
+				padding: 6px 0;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+			}
+
+			.badge {
+				align-self: start;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-width: 74px;
+				padding: 3px 10px;
+				border-radius: 999px;
+				font-size: 17px;
+				font-weight: 700;
+				color: #06111c;
+				letter-spacing: 0.05em;
+			}
+
+			.badge-bbs {
+				background: var(--badge-bbs);
+			}
+
+			.badge-twitch {
+				background: var(--badge-twitch);
+			}
+
+			.message-main {
+				display: flex;
+				flex-direction: column;
+				gap: 4px;
+				min-width: 0;
+			}
+
+			.message-meta {
+				font-size: 20px;
+				color: var(--text-sub);
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			.message-text {
+				font-size: 36px;
+				line-height: 1.25;
+				word-break: break-word;
+			}
+
+			.message-empty {
+				margin: 0;
+				padding: 14px 0;
+				font-size: 28px;
+				color: var(--text-sub);
+			}
+		</style>
+		<script type="module" src="./index.js"></script>
+	</head>
+	<body>
+		<div class="stage">
+			<section class="chat-panel" aria-live="polite">
+				<header class="panel-header">
+					<div class="panel-title">Chat Bridge Monitor</div>
+					<div class="panel-meta">
+						<div id="connection-status">waiting for messages...</div>
+						<div id="message-count">0 messages</div>
+					</div>
+				</header>
+				<ul id="message-list" class="message-list">
+					<li class="message-empty">No message received yet.</li>
+				</ul>
+			</section>
+		</div>
+
+		<template id="message-item-template">
+			<li class="message-item">
+				<span data-role="source-badge" class="badge">BBS</span>
+				<div class="message-main">
+					<div data-role="message-meta" class="message-meta"></div>
+					<div data-role="message-text" class="message-text"></div>
+				</div>
+			</li>
+		</template>
+
+		<template id="message-empty-template">
+			<li class="message-empty">No message received yet.</li>
+		</template>
+	</body>
+</html>
