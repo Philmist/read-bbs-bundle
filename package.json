@@ -51,12 +51,16 @@
     ]
   },
   "dependencies": {
+    "@twurple/api": "^7.4.0",
+    "@twurple/auth": "^7.4.0",
+    "@twurple/eventsub-ws": "^7.4.0",
     "@types/createjs": "^0.0.32",
     "mqtt": "^5.15.0",
     "ts-node": "*"
   },
   "scripts": {
-    "build": "run-p build:*",
+    "build": "run-s build:schemas build:all",
+    "build:all": "run-p build:assets build:extension build:dashboard build:graphics",
     "build:assets": "node scripts/copy-assets.js",
     "build:schemas": "npm run generate-schema-types",
     "build:extension": "tsc -p src/extension/tsconfig.json",

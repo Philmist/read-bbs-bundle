@@ -10,5 +10,22 @@
 		"reconnectPeriodMs": 3000,
 		"connectTimeoutMs": 30000,
 		"keepaliveSec": 60
+	},
+	"twitchChat": {
+		"enabled": false,
+		"clientId": "YOUR_TWITCH_CLIENT_ID",
+		"clientSecret": "YOUR_TWITCH_CLIENT_SECRET",
+		"initialToken": {
+			"accessToken": "YOUR_TWITCH_USER_ACCESS_TOKEN",
+			"refreshToken": "YOUR_TWITCH_REFRESH_TOKEN",
+			"scope": ["user:read:chat"],
+			"expiresIn": 0,
+			"obtainmentTimestamp": 0
+		},
+		"broadcasterUserId": "YOUR_TWITCH_BROADCASTER_USER_ID",
+		"broadcasterUserLogin": "YOUR_TWITCH_BROADCASTER_LOGIN",
+		"readAsUserId": "YOUR_TWITCH_READ_AS_USER_ID",
+		"messageName": "chat:bridge:message",
+		"debug": false
 	}
 }

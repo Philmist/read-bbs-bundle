@@ -1,0 +1,81 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"description": "Runtime Twitch authentication state persisted in a Replicant.",
+	"properties": {
+		"version": {
+			"type": "integer",
+			"enum": [1]
+		},
+		"status": {
+			"type": "string",
+			"enum": ["disabled", "misconfigured", "starting", "running", "error"]
+		},
+		"tokenSource": {
+			"type": "string",
+			"enum": ["none", "config", "replicant", "refresh"]
+		},
+		"userId": {
+			"type": ["string", "null"]
+		},
+		"token": {
+			"oneOf": [
+				{
+					"type": "null"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"accessToken": {
+							"type": "string",
+							"minLength": 1
+						},
+						"refreshToken": {
+							"type": ["string", "null"]
+						},
+						"scope": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"expiresIn": {
+							"type": ["integer", "null"],
+							"minimum": 0
+						},
+						"obtainmentTimestamp": {
+							"type": "integer",
+							"minimum": 0
+						}
+					},
+					"required": ["accessToken", "refreshToken", "scope", "expiresIn", "obtainmentTimestamp"],
+					"additionalProperties": false
+				}
+			]
+		},
+		"updatedAt": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"lastRefreshAt": {
+			"type": ["string", "null"],
+			"format": "date-time"
+		},
+		"lastError": {
+			"type": ["string", "null"]
+		}
+	},
+	"required": ["version", "status", "tokenSource", "userId", "token", "updatedAt", "lastRefreshAt", "lastError"],
+	"additionalProperties": false,
+	"default": {
+		"version": 1,
+		"status": "disabled",
+		"tokenSource": "none",
+		"userId": null,
+		"token": null,
+		"updatedAt": "1970-01-01T00:00:00.000Z",
+		"lastRefreshAt": null,
+		"lastError": null
+	}
+}
