@@ -3,9 +3,6 @@ coverage
 bower_components
 .parcel-cache
 *.log
-/dashboard
-/graphics
-/extension
 /db
 /cfg/*
 !/cfg/read-bbs-bundle.json.example
