@@ -27,6 +27,13 @@
         "width": 2,
         "file": "read-bbs.html",
         "headerColor": "#525F78"
+      },
+      {
+        "name": "chat-bridge-test",
+        "title": "Chat Bridge Test",
+        "width": 3,
+        "file": "chat-bridge-test.html",
+        "headerColor": "#4068A8"
       }
     ],
     "graphics": [

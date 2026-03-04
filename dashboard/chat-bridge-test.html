@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<style>
+			body {
+				margin: 12px;
+				font-family: Arial, sans-serif;
+				font-size: 14px;
+			}
+
+			.panel {
+				display: grid;
+				gap: 10px;
+			}
+
+			.row {
+				display: grid;
+				gap: 4px;
+			}
+
+			.inline-row {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 8px;
+			}
+
+			input,
+			textarea,
+			select,
+			button {
+				font-size: 14px;
+				padding: 6px;
+			}
+
+			textarea {
+				min-height: 80px;
+				resize: vertical;
+			}
+
+			.actions {
+				display: flex;
+				gap: 8px;
+			}
+
+			#status {
+				padding: 8px;
+				border-radius: 4px;
+				background: #f0f0f0;
+			}
+
+			#status.success {
+				background: #d6f5dd;
+			}
+
+			#status.error {
+				background: #f9d6d6;
+			}
+
+			#history {
+				margin: 0;
+				padding-left: 18px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="panel">
+			<div class="row">
+				<label for="platform">Platform</label>
+				<select id="platform">
+					<option value="twitch">Twitch</option>
+					<option value="bbs_jpnkn">BBS.JPNKN</option>
+				</select>
+			</div>
+
+			<div class="row">
+				<label for="text">Message Text</label>
+				<textarea id="text" placeholder="Type test message"></textarea>
+			</div>
+
+			<div class="inline-row">
+				<div class="row">
+					<label for="authorDisplayName">Author Display Name</label>
+					<input id="authorDisplayName" type="text" value="Test User" />
+				</div>
+				<div class="row">
+					<label for="authorId">Author ID (optional)</label>
+					<input id="authorId" type="text" />
+				</div>
+			</div>
+
+			<div class="inline-row">
+				<div class="row">
+					<label for="channelId">Channel ID / Board ID</label>
+					<input id="channelId" type="text" value="test_channel" />
+				</div>
+				<div class="row">
+					<label for="channelName">Channel Name</label>
+					<input id="channelName" type="text" value="test_channel" />
+				</div>
+			</div>
+
+			<div class="row" id="threadRow" style="display: none">
+				<label for="threadId">Thread ID</label>
+				<input id="threadId" type="text" value="test-thread" />
+			</div>
+
+			<div class="inline-row">
+				<div class="row">
+					<label for="isReply">Is Reply</label>
+					<select id="isReply">
+						<option value="false" selected>false</option>
+						<option value="true">true</option>
+					</select>
+				</div>
+				<div class="row">
+					<label for="replyParentMessageId">Reply Parent Message ID</label>
+					<input id="replyParentMessageId" type="text" />
+				</div>
+			</div>
+
+			<div class="row">
+				<label for="tagsJson">Tags JSON (optional)</label>
+				<textarea id="tagsJson" placeholder='{"mail":"sage"}'></textarea>
+			</div>
+
+			<div class="row">
+				<label for="rawPayload">Raw Payload (optional)</label>
+				<textarea id="rawPayload"></textarea>
+			</div>
+
+			<div class="actions">
+				<button id="send">Send Test Message</button>
+				<button id="loadTwitch">Load Twitch Example</button>
+				<button id="loadBbs">Load BBS Example</button>
+				<button id="clear">Clear</button>
+			</div>
+
+			<div id="status">Ready.</div>
+
+			<div>
+				<strong>Recent Emits</strong>
+				<ul id="history"></ul>
+			</div>
+		</div>
+		<script type="module" src="./chat-bridge-test.js"></script>
+	</body>
+</html>
