@@ -1,0 +1,47 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"description": "Request payload for emitting a normalized test chat message from dashboard.",
+	"properties": {
+		"platform": {
+			"type": "string",
+			"enum": ["twitch", "bbs_jpnkn"]
+		},
+		"text": {
+			"type": "string",
+			"minLength": 1
+		},
+		"authorDisplayName": {
+			"type": "string"
+		},
+		"authorId": {
+			"type": ["string", "null"]
+		},
+		"channelId": {
+			"type": "string"
+		},
+		"channelName": {
+			"type": "string"
+		},
+		"threadId": {
+			"type": "string"
+		},
+		"isReply": {
+			"type": "boolean"
+		},
+		"replyParentMessageId": {
+			"type": ["string", "null"]
+		},
+		"tags": {
+			"type": "object",
+			"additionalProperties": {
+				"type": "string"
+			}
+		},
+		"rawPayload": {
+			"type": "string"
+		}
+	},
+	"required": ["platform", "text"],
+	"additionalProperties": false
+}
